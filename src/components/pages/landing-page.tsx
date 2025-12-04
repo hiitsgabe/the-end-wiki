@@ -1,8 +1,15 @@
 import React from 'react'
 import { BoxesBg, Navbar } from '@/components/ui'
 import { Logo } from '@/components/atoms'
+import { getHotGames } from '@/services/internal/games'
 
-function LandingPage() {
+const getMostPopularGames = async () => {
+    const games = await getHotGames()
+    console.log(games)
+}
+
+const LandingPage = async () => {
+    await getMostPopularGames()
     return (
         <div>
             <div className="h-[80vh] relative w-full overflow-hidden">

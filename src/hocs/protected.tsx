@@ -15,6 +15,5 @@ async function UserDetails() {
 
 export default function ProtectedPage({ children }: { children: (user: any) => React.ReactNode }) {
     const user = UserDetails()
-
     return children(user)
 }

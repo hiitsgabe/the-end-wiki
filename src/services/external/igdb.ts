@@ -14,16 +14,20 @@ let accessTokenExpiry: number | null = null
 
 
 const getAccessToken = async () => {
-    const response = await twitchApi.post("", {
-        params: {
+    console.log("GETTING ACCESS TOKEN")
+    try {
+        const response = await twitchApi.post("", {
             client_id: process.env.IGDB_CLIENT_ID,
             client_secret: process.env.IGDB_CLIENT_SECRET,
             grant_type: "client_credentials"
-        }
-    })
-    accessToken = response.data.access_token
-    accessTokenExpiry = Date.now() + response.data.expires_in * 1000
-    return response.data.access_token
+        })
+        accessToken = response.data.access_token
+        accessTokenExpiry = Date.now() + response.data.expires_in * 1000
+        return response.data.access_token
+    } catch (error: unknown) {
+        console.log(error)
+        return null
+    }
 }
 
 igdbApi.interceptors.request.use(async (config) => {
